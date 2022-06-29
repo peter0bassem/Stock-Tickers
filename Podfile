@@ -9,6 +9,7 @@ target 'Stock Tickers' do
   pod 'Alamofire'
   pod 'PromisedFuture'
   pod 'SVProgressHUD'
+  pod 'Kingfisher'
   
     # remove pod target integrity warning.
   post_install do |installer|
