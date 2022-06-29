@@ -10,7 +10,7 @@ import Foundation
 import SVProgressHUD
 
 class SVProgressHUDManager {
-    static func showLoading() {
+    static func showLoading(onView view: UIView) {
         SVProgressHUD.show()
     }
     

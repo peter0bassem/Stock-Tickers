@@ -33,7 +33,7 @@ extension BaseTabBarViewController: BaseViewProtocol {
     
     func showLoading() {
         view.subviews.forEach { $0.alpha = 0 }
-        SVProgressHUDManager.showLoading()
+        SVProgressHUDManager.showLoading(onView: view)
     }
     
     func hideLoading() {

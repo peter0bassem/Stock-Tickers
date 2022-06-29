@@ -97,7 +97,8 @@ extension HomePresenter {
     }
     
     func configureMoreNewsCell(_ cell: MoreNewsCollectionViewCellProtocol, atIndex index: Int) {
-        cell.displayLatestNewsItemImage(URL(string: moreNews[index].urlToImage ?? ""))
-        cell.displayLatestNewsItemTitle(moreNews[index].title ?? "")
+        cell.displayMoreNewsItemImage(URL(string: moreNews[index].urlToImage ?? ""))
+        cell.displayMoreNewsItemTitle(moreNews[index].title ?? "")
+        cell.displayMoreNewsItemsPublishDate(moreNews[index].publishedAt?.formatDate(inputFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'", outputFormat: "d/M/yy h:mm a") ?? "")
     }
 }

@@ -83,7 +83,7 @@ extension HomeViewController {
     }
     
     private func configureMoreNewsSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(240)))
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(280)))
         item.contentInsets.bottom = 16
         let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200)), subitems: [item])
         let section = NSCollectionLayoutSection(group: group)

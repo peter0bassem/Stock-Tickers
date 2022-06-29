@@ -34,17 +34,12 @@ extension BaseViewController: BaseViewProtocol {
     
     func showLoading() {
         view.subviews.forEach { $0.alpha = 0 }
-//        SVProgressHUDManager.showLoading()
-        DispatchQueue.main.async {
-            SVProgressHUD.show()
-        }
+        SVProgressHUDManager.showLoading(onView: view)
     }
     
     func hideLoading() {
         view.subviews.forEach { $0.alpha = 1 }
-        DispatchQueue.main.async {
-            SVProgressHUD.dismiss()
-        }
+        SVProgressHUDManager.hideLoading()
     }
     
     func showToastMessage(_ message: String) {

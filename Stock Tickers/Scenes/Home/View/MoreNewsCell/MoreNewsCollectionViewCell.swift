@@ -8,15 +8,18 @@
 import UIKit
 
 protocol MoreNewsCollectionViewCellProtocol {
-    func displayLatestNewsItemImage(_ imageURL: URL?)
-    func displayLatestNewsItemTitle(_ title: String)
+    func displayMoreNewsItemImage(_ imageURL: URL?)
+    func displayMoreNewsItemTitle(_ title: String)
+    func displayMoreNewsItemsPublishDate(_ date: String)
+    
 }
 
 final class MoreNewsCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: Outlets
-    @IBOutlet private weak var latestNewsItemImageView: UIImageView!
-    @IBOutlet private weak var latestNewsItemTitleLabel: UILabel!
+    @IBOutlet private weak var moreNewsItemImageView: UIImageView!
+    @IBOutlet private weak var moreNewsItemTitleLabel: UILabel!
+    @IBOutlet private weak var moreNewsItemPublishDateLabel: UILabel!
     
     // MARK: Variables
     
@@ -29,11 +32,15 @@ final class MoreNewsCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: LatestNewsCollectionViewCellProtocol
 extension MoreNewsCollectionViewCell: MoreNewsCollectionViewCellProtocol {
-    func displayLatestNewsItemImage(_ imageURL: URL?) {
-        latestNewsItemImageView.downloadRemoteImage(fromUrl: imageURL, placeholder: UIImage(systemName: "photo")?.withTintColor(.lightGray, renderingMode: .alwaysTemplate))
+    func displayMoreNewsItemImage(_ imageURL: URL?) {
+        moreNewsItemImageView.downloadRemoteImage(fromUrl: imageURL, placeholder: UIImage(systemName: "photo")?.withTintColor(.lightGray, renderingMode: .alwaysTemplate))
     }
     
-    func displayLatestNewsItemTitle(_ title: String) {
-        latestNewsItemTitleLabel.text = title
+    func displayMoreNewsItemTitle(_ title: String) {
+        moreNewsItemTitleLabel.text = title
+    }
+    
+    func displayMoreNewsItemsPublishDate(_ date: String) {
+        moreNewsItemPublishDateLabel.text = date
     }
 }
