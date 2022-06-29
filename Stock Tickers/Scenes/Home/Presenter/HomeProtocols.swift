@@ -14,6 +14,8 @@ import Foundation
 protocol HomeViewProtocol: BaseViewProtocol {
     var presenter: HomePresenterProtocol! { get set }
     func refreshStocksSection()
+    func refreshLatestNewsSection()
+    func refreshMoreNewsSection()
 }
 
 protocol HomePresenterProtocol: BasePresenterProtocol {
@@ -24,6 +26,10 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
     func configureCollectionHeader(_ header: CollectionHeaderCollectionReusableViewProtocol, forSection section: Int)
     var stocksCount: Int { get }
     func configureStockCell(_ cell: StockCollectionViewCellProtocol, atIndex index: Int)
+    var latestNewsItemsCount: Int { get }
+    func configureLatestNewsCell(_ cell: LatestNewsCollectionViewCellProtocol, atIndex index: Int)
+    var moreNewsItemsCount: Int { get }
+    func configureMoreNewsCell(_ cell: MoreNewsCollectionViewCellProtocol, atIndex index: Int)
 }
 
 protocol HomeRouterProtocol: BaseRouterProtocol {
@@ -36,5 +42,8 @@ protocol HomeInteractorInputProtocol: BaseInteractorInputProtocol {
 }
 
 protocol HomeInteractorOutputProtocol: BaseInteractorOutputProtocol {
+    func endLoading()
     func fetchingStocksSuccessfully(_ stocks: [StockTicker])
+    func fetchingArticlesSuccessfully(_ artices: [Article])
+    func fetchingDataFailed(withError error: String)
 }

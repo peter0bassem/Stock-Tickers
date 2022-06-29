@@ -13,4 +13,12 @@ extension HomeViewController: HomeViewProtocol {
     func refreshStocksSection() {
         _collectionView.reloadSections(IndexSet(integer: 0))
     }
+    
+    func refreshLatestNewsSection() {
+        _collectionView.reloadSections(IndexSet(integer: 1))
+    }
+    
+    func refreshMoreNewsSection() {
+        _collectionView.reloadSections(IndexSet(integer: 2))
+    }
 }

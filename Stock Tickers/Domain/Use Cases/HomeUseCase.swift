@@ -9,12 +9,18 @@ import Foundation
 
 class HomeUseCase {
     private let stockTickersRepository: StockTickersRepository
+    private let newsRepository: NewsRepository
     
-    init(stockTickersRepository: StockTickersRepository) {
+    init(stockTickersRepository: StockTickersRepository, newsRepository: NewsRepository) {
         self.stockTickersRepository = stockTickersRepository
+        self.newsRepository = newsRepository
     }
     
     func getStockTickers(completion: @escaping ([StockTicker]) -> Void) {
         stockTickersRepository.getStockTickers(completion: completion)
+    }
+    
+    func getNews(completion: @escaping (Result<APIResponse, NetworkErrorType>) -> Void) {
+        newsRepository.getNews(completion: completion)
     }
 }

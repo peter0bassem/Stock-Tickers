@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class BaseViewController: UIViewController {
     
@@ -33,12 +34,17 @@ extension BaseViewController: BaseViewProtocol {
     
     func showLoading() {
         view.subviews.forEach { $0.alpha = 0 }
-        SVProgressHUDManager.showLoading()
+//        SVProgressHUDManager.showLoading()
+        DispatchQueue.main.async {
+            SVProgressHUD.show()
+        }
     }
     
     func hideLoading() {
         view.subviews.forEach { $0.alpha = 1 }
-        SVProgressHUDManager.hideLoading()
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+        }
     }
     
     func showToastMessage(_ message: String) {

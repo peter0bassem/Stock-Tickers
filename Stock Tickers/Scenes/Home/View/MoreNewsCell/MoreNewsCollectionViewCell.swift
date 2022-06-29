@@ -1,5 +1,5 @@
 //
-//  LatestNewsCollectionViewCell.swift
+//  MoreNewsCollectionViewCell.swift
 //  Stock Tickers
 //
 //  Created by Peter Bassem on 29/06/2022.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol LatestNewsCollectionViewCellProtocol {
-    func displayLatestNewsItemTitle(_ title: String)
+protocol MoreNewsCollectionViewCellProtocol {
     func displayLatestNewsItemImage(_ imageURL: URL?)
+    func displayLatestNewsItemTitle(_ title: String)
 }
 
-final class LatestNewsCollectionViewCell: BaseCollectionViewCell {
+final class MoreNewsCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: Outlets
-    @IBOutlet private weak var latestNewsItemTitleLabel: UILabel!
     @IBOutlet private weak var latestNewsItemImageView: UIImageView!
+    @IBOutlet private weak var latestNewsItemTitleLabel: UILabel!
     
     // MARK: Variables
     
@@ -28,12 +28,12 @@ final class LatestNewsCollectionViewCell: BaseCollectionViewCell {
 }
 
 // MARK: LatestNewsCollectionViewCellProtocol
-extension LatestNewsCollectionViewCell: LatestNewsCollectionViewCellProtocol {
-    func displayLatestNewsItemTitle(_ title: String) {
-        latestNewsItemTitleLabel.text = title
-    }
-    
+extension MoreNewsCollectionViewCell: MoreNewsCollectionViewCellProtocol {
     func displayLatestNewsItemImage(_ imageURL: URL?) {
         latestNewsItemImageView.downloadRemoteImage(fromUrl: imageURL, placeholder: UIImage(systemName: "photo")?.withTintColor(.lightGray, renderingMode: .alwaysTemplate))
+    }
+    
+    func displayLatestNewsItemTitle(_ title: String) {
+        latestNewsItemTitleLabel.text = title
     }
 }

@@ -9,33 +9,33 @@ import Foundation
 import Alamofire
 
 enum APIRouter: APIConfiguration {
-    case login
+    case getNews
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
         switch self {
-        case .login: return .get
+        case .getNews: return .get
         }
     }
     
     // MARK: - Path
     var path: String {
         switch self {
-        case .login: return "api/Authentication/Login"
+        case .getNews: return "NewsAPI/everything/cnn.json"
         }
     }
     
     // MARK: - Quary
     var query: [URLQueryItem]? {
         switch self {
-        case .login: return nil
+        case .getNews: return nil
         }
     }
     
     // MARK: - Parameters
     var parameters: Parameters? {
         switch self {
-        case .login: return nil
+        case .getNews: return nil
         }
     }
     
