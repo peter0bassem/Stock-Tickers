@@ -21,4 +21,12 @@ extension HomeViewController: HomeViewProtocol {
     func refreshMoreNewsSection() {
         _collectionView.reloadSections(IndexSet(integer: 2))
     }
+    
+    func refreshHistoryNewsSection() {
+        _collectionView.reloadSections(IndexSet(integer: 3))
+    }
+    
+    func deleteSavedArticle(atIndex index: Int) {
+        _collectionView.deleteItems(at: [IndexPath(item: index, section: 3)])
+    }
 }

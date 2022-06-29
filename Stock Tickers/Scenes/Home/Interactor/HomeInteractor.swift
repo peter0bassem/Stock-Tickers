@@ -65,6 +65,10 @@ class HomeInteractor: HomeInteractorInputProtocol {
             dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
+        fetchSavedArticles()
+        dispatchGroup.leave()
+        
         dispatchGroup.notify(queue: .main) { [unowned self] in
             self.presenter?.endLoading()
             if let error = self.error {
@@ -75,6 +79,44 @@ class HomeInteractor: HomeInteractorInputProtocol {
             }
             if let articles = self.articles {
                 self.presenter?.fetchingArticlesSuccessfully(articles)
+            }
+        }
+    }
+    
+    func fetchSavedArticles() {
+        useCase.fetchArticles { [unowned self] articles in
+            let savedArticles = articles.map { Article(title: $0.title, urlToImage: $0.urlToImage, publishedAt: $0.publishedAt) }
+            DispatchQueue.main.async { [unowned self] in
+                self.presenter?.fetchingSavedArticlesSuccessfully(savedArticles)
+            }
+        }
+    }
+    
+    func addArticle(_ article: Article) {
+        useCase.addArticle(article) { [unowned self] savedArticle, error in
+            if let error = error {
+                DispatchQueue.main.async { [unowned self] in
+                    self.presenter?.fetchingDataFailed(withError: error.localizedDescription)
+                    return
+                }
+            }
+            useCase.fetchArticles { [unowned self] articles in
+                let savedArticles = articles.map { Article(title: $0.title, urlToImage: $0.urlToImage, publishedAt: $0.publishedAt) }
+                DispatchQueue.main.async { [unowned self] in
+                    self.presenter?.fetchingSavedArticlesSuccessfully(savedArticles)
+                }
+            }
+        }
+    }
+    
+    func deleteArtice(_ artice: ArticleModel, forSection section: Int, atIndex index: Int) {
+        useCase.deleteArtice(artice) { [unowned self] error in
+            DispatchQueue.main.async { [unowned self] in
+                if let error = error {
+                    self.presenter?.fetchingDataFailed(withError: error.localizedDescription)
+                    return
+                }
+                self.presenter?.deleteSavedArticleSuccessfully(forSection: section, atIndex: index)
             }
         }
     }

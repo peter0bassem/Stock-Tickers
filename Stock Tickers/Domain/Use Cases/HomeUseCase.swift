@@ -23,4 +23,16 @@ class HomeUseCase {
     func getNews(completion: @escaping (Result<APIResponse, NetworkErrorType>) -> Void) {
         newsRepository.getNews(completion: completion)
     }
+    
+    func fetchArticles(completion: ([ArticleModel]) -> Void) {
+        newsRepository.fetchArticles(completion: completion)
+    }
+    
+    func addArticle(_ article: Article, completion: (ArticleModel?, Error?) -> Void) {
+        newsRepository.addArticle(article, completion: completion)
+    }
+    
+    func deleteArtice(_ artice: ArticleModel, completion: (Error?) -> Void) {
+        newsRepository.deleteArtice(artice, completion: completion)
+    }
 }

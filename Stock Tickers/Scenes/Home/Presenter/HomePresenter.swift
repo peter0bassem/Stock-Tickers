@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: Home Presenter -
 
@@ -17,15 +18,21 @@ class HomePresenter: BasePresenter {
     private let interactor: HomeInteractorInputProtocol
     private let router: HomeRouterProtocol
     
-    private let sectionTitles = ["Stocks", "Latest News", "More News"]
+    private let sectionTitles = ["Stocks", "Latest News", "More News", "History"]
     private var stocks: [StockTicker] = []
     private var latestNews: [Article] = []
     private var moreNews: [Article] = []
+    private var savedNews: [Article] = []
     
     init(view: HomeViewProtocol, interactor: HomeInteractorInputProtocol, router: HomeRouterProtocol) {
         self.view = view
         self.interactor = interactor
         self.router = router
+    }
+    
+    private func saveArticleLocally(forSection section: Int, atIndex index: Int) {
+        let newsItem = section == 1 ? latestNews[index] : moreNews[index]
+        self.interactor.addArticle(newsItem)
     }
 }
 
@@ -55,7 +62,16 @@ extension HomePresenter: HomeInteractorOutputProtocol {
         
         self.moreNews = Array(artices.dropFirst(6))
         view?.refreshMoreNewsSection()
-        
+    }
+    
+    func fetchingSavedArticlesSuccessfully(_ articles: [Article]) {
+        self.savedNews = articles
+        view?.refreshHistoryNewsSection()
+    }
+    
+    func deleteSavedArticleSuccessfully(forSection section: Int, atIndex index: Int) {
+        view?.deleteSavedArticle(atIndex: index)
+        saveArticleLocally(forSection: section, atIndex: index)
     }
     
     func fetchingDataFailed(withError error: String) {
@@ -69,6 +85,10 @@ extension HomePresenter {
 }
 
 extension HomePresenter {
+    var sectionsCount: Int {
+        return sectionTitles.count
+    }
+    
     func configureCollectionHeader(_ header: CollectionHeaderCollectionReusableViewProtocol, forSection section: Int) {
         header.displayTitle(sectionTitles[section])
     }
@@ -100,5 +120,32 @@ extension HomePresenter {
         cell.displayMoreNewsItemImage(URL(string: moreNews[index].urlToImage ?? ""))
         cell.displayMoreNewsItemTitle(moreNews[index].title ?? "")
         cell.displayMoreNewsItemsPublishDate(moreNews[index].publishedAt?.formatDate(inputFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'", outputFormat: "d/M/yy h:mm a") ?? "")
+    }
+    
+    func didSelectNewsItem(inSection section: Int, atIndex index: Int) {
+        if savedNews.count >= 10 {
+            let toBeDeletedArticeModel = savedNews.filter { $0.title == savedNews[0].title && $0.urlToImage == savedNews[0].urlToImage && $0.publishedAt == savedNews[0].publishedAt }.first
+            
+            let articleModelObject = ArticleModel(context: CoreDataManager.shared.persistentContainer.viewContext)
+            articleModelObject.title = toBeDeletedArticeModel?.title
+            articleModelObject.urlToImage = toBeDeletedArticeModel?.urlToImage
+            articleModelObject.publishedAt = toBeDeletedArticeModel?.publishedAt
+            
+        
+            savedNews.remove(at: 0)
+            interactor.deleteArtice(articleModelObject, forSection: section, atIndex: index)
+        } else {
+            saveArticleLocally(forSection: section, atIndex: index)
+        }
+    }
+    
+    var savedItemsCount: Int {
+        return savedNews.count
+    }
+    
+    func configureSavedNewsCell(_ cell: MoreNewsCollectionViewCellProtocol, atIndex index: Int) {
+        cell.displayMoreNewsItemImage(URL(string: savedNews[index].urlToImage ?? ""))
+        cell.displayMoreNewsItemTitle(savedNews[index].title ?? "")
+        cell.displayMoreNewsItemsPublishDate(savedNews[index].publishedAt?.formatDate(inputFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'", outputFormat: "d/M/yy h:mm a") ?? "")
     }
 }

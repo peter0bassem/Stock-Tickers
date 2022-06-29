@@ -13,6 +13,17 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 import Foundation
 struct Article : Codable {
+    internal init(source: Source? = nil, author: String? = nil, title: String?, description: String? = nil, url: String? = nil, urlToImage: String?, publishedAt: String?, content: String? = nil) {
+        self.source = source
+        self.author = author
+        self.title = title
+        self.description = description
+        self.url = url
+        self.urlToImage = urlToImage
+        self.publishedAt = publishedAt
+        self.content = content
+    }
+    
 	let source : Source?
 	let author : String?
 	let title : String?
@@ -46,4 +57,5 @@ struct Article : Codable {
 		content = try values.decodeIfPresent(String.self, forKey: .content)
 	}
 
+    
 }

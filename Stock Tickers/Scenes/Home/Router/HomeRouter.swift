@@ -19,7 +19,11 @@ class HomeRouter: BaseRouter, HomeRouterProtocol {
         let interactor = HomeInteractor(
             useCase: HomeUseCase(
                 stockTickersRepository: StockTickersRepositoryImp(),
-                newsRepository: NewsRepositoryImp()
+                newsRepository: NewsRepositoryImp(
+                    newsLocalDataSource: NewsLocalDataSource(
+                        localStorageManager: CoreDataManager.shared
+                    )
+                )
             )
         )
         let router = HomeRouter()

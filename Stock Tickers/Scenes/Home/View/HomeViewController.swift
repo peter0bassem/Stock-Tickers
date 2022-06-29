@@ -51,6 +51,7 @@ extension HomeViewController {
             case 0: return self.configureStocksSection()
             case 1: return self.configureLatestNewsSection()
             case 2: return self.configureMoreNewsSection()
+            case 3: return self.configureHistorySection()
             default: return nil
             }
         }
@@ -94,6 +95,19 @@ extension HomeViewController {
         ]
         return section
     }
+    
+    private func configureHistorySection() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(280)))
+        item.contentInsets.bottom = 16
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200)), subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets.leading = 16
+        section.contentInsets.trailing = 16
+        section.boundarySupplementaryItems = [
+            .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        ]
+        return section
+    }
 }
 
 // MARK: - Selectors
@@ -105,7 +119,7 @@ extension HomeViewController {
 extension HomeViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return presenter.sectionsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -119,6 +133,7 @@ extension HomeViewController: UICollectionViewDataSource {
         case 0: return presenter.stocksCount
         case 1: return presenter.latestNewsItemsCount
         case 2: return presenter.moreNewsItemsCount
+        case 3: return presenter.savedItemsCount
         default: return 0
         }
     }
@@ -137,18 +152,20 @@ extension HomeViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueCell(at: indexPath) as MoreNewsCollectionViewCell
             presenter.configureMoreNewsCell(cell, atIndex: indexPath.item)
             return cell
+        case 3:
+            let cell = collectionView.dequeueCell(at: indexPath) as MoreNewsCollectionViewCell
+            presenter.configureSavedNewsCell(cell, atIndex: indexPath.item)
+            return cell
         default: return UICollectionViewCell()
         }
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
-    
-}
-
-class Cell: UICollectionViewCell {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 || indexPath.section == 2 {
+            presenter.didSelectNewsItem(inSection: indexPath.section, atIndex: indexPath.item)
+        }
+    }
 }

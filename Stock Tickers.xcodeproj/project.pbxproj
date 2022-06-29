@@ -88,6 +88,10 @@
 		E0437320286C74CC00B3A233 /* NewsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E043731F286C74CC00B3A233 /* NewsRemoteDataSource.swift */; };
 		E0437324286C7B4500B3A233 /* MoreNewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0437322286C7B4400B3A233 /* MoreNewsCollectionViewCell.swift */; };
 		E0437325286C7B4500B3A233 /* MoreNewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0437323286C7B4400B3A233 /* MoreNewsCollectionViewCell.xib */; };
+		E094C3DF286C8A7600F69CFD /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E094C3DE286C8A7600F69CFD /* LocalStorageManager.swift */; };
+		E094C3E1286C8A8800F69CFD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E094C3E0286C8A8800F69CFD /* CoreDataManager.swift */; };
+		E094C3E6286C91B900F69CFD /* NewsLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E094C3E5286C91B900F69CFD /* NewsLocalDataSource.swift */; };
+		E094C410286C9D6500F69CFD /* Stock_Tickers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E094C40D286C9C1000F69CFD /* Stock_Tickers.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +180,10 @@
 		E0437322286C7B4400B3A233 /* MoreNewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreNewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0437323286C7B4400B3A233 /* MoreNewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreNewsCollectionViewCell.xib; sourceTree = "<group>"; };
 		E0437326286C7FE100B3A233 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		E094C3DE286C8A7600F69CFD /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
+		E094C3E0286C8A8800F69CFD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		E094C3E5286C91B900F69CFD /* NewsLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsLocalDataSource.swift; sourceTree = "<group>"; };
+		E094C40E286C9C1000F69CFD /* Stock_Tickers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stock_Tickers.xcdatamodel; sourceTree = "<group>"; };
 		F335ECC4764E5CB97002DB5F /* Pods-Stock Tickers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock Tickers.release.xcconfig"; path = "Target Support Files/Pods-Stock Tickers/Pods-Stock Tickers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,6 +246,7 @@
 				E0437241286C47BD00B3A233 /* Data */,
 				E043724A286C480B00B3A233 /* Utils */,
 				E043724B286C481200B3A233 /* Scenes */,
+				E094C40D286C9C1000F69CFD /* Stock_Tickers.xcdatamodeld */,
 			);
 			path = "Stock Tickers";
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 		E0437247286C47E200B3A233 /* Local Data Source */ = {
 			isa = PBXGroup;
 			children = (
+				E094C3E5286C91B900F69CFD /* NewsLocalDataSource.swift */,
 			);
 			path = "Local Data Source";
 			sourceTree = "<group>";
@@ -389,6 +399,7 @@
 				E04372C3286C4DD200B3A233 /* ExtensionViews */,
 				E043727C286C4A5C00B3A233 /* Localization Manager */,
 				E04372B6286C4D6F00B3A233 /* Constants Manager */,
+				E094C3DD286C8A3D00F69CFD /* LocalStorageManagers */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -650,6 +661,15 @@
 			path = MoreNewsCell;
 			sourceTree = "<group>";
 		};
+		E094C3DD286C8A3D00F69CFD /* LocalStorageManagers */ = {
+			isa = PBXGroup;
+			children = (
+				E094C3DE286C8A7600F69CFD /* LocalStorageManager.swift */,
+				E094C3E0286C8A8800F69CFD /* CoreDataManager.swift */,
+			);
+			path = LocalStorageManagers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -771,8 +791,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0437306286C67ED00B3A233 /* CollectionHeaderCollectionReusableView.swift in Sources */,
+				E094C3DF286C8A7600F69CFD /* LocalStorageManager.swift in Sources */,
 				E043723F286C47A200B3A233 /* APIRouter.swift in Sources */,
 				E0437270286C498F00B3A233 /* ReachabilityManager.swift in Sources */,
+				E094C3E6286C91B900F69CFD /* NewsLocalDataSource.swift in Sources */,
 				E0437278286C498F00B3A233 /* URLExtensions.swift in Sources */,
 				E0437318286C741800B3A233 /* Article.swift in Sources */,
 				E0437319286C741800B3A233 /* APIResponse.swift in Sources */,
@@ -787,6 +809,7 @@
 				E04372E5286C4DD200B3A233 /* UICollectionViewExtensions.swift in Sources */,
 				E0437272286C498F00B3A233 /* APIConfiguration.swift in Sources */,
 				E043727A286C498F00B3A233 /* IntExtensions.swift in Sources */,
+				E094C3E1286C8A8800F69CFD /* CoreDataManager.swift in Sources */,
 				E043731A286C741800B3A233 /* Source.swift in Sources */,
 				E043728D286C4C4200B3A233 /* HomeProtocols.swift in Sources */,
 				E043728B286C4C4200B3A233 /* HomeRouter.swift in Sources */,
@@ -815,6 +838,7 @@
 				E043727F286C4A5C00B3A233 /* LocalizationHelper.swift in Sources */,
 				E04372FA286C50BF00B3A233 /* SVProgressHUDManager.swift in Sources */,
 				E04372B2286C4CF300B3A233 /* BaseTabBarViewController.swift in Sources */,
+				E094C410286C9D6500F69CFD /* Stock_Tickers.xcdatamodeld in Sources */,
 				E043731C286C743500B3A233 /* NewsRepository.swift in Sources */,
 				E043723E286C47A200B3A233 /* HeaderInterceptor.swift in Sources */,
 				E04372C1286C4D6F00B3A233 /* Typealias.swift in Sources */,
@@ -1055,6 +1079,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E094C40D286C9C1000F69CFD /* Stock_Tickers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E094C40E286C9C1000F69CFD /* Stock_Tickers.xcdatamodel */,
+			);
+			currentVersion = E094C40E286C9C1000F69CFD /* Stock_Tickers.xcdatamodel */;
+			path = Stock_Tickers.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E0437213286C45A600B3A233 /* Project object */;
 }
